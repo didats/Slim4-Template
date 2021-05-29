@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Core;
+namespace App\Applications\Core;
 
 use App\Applications\Error\PostValidation;
 use Psr\Container\ContainerInterface;

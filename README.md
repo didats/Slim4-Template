@@ -2,11 +2,13 @@
 
 **This is still on progress**
 
-As the default skeleton Slim 4 is too complicated for me and there are things that I dislike, I made my own version of template. This is way easier, at least for me. I put it as public repository in order for me to use it again on the next project. If somehow someone feel it is useful, then it is a bonus.
+The default skeleton from official page of Slim4 is quite difficult for me to understand, and not fun. This version is based on my understanding, and in my opinion quite easy. 
+
+I am putting it to the public repository so I could use it in the future. I hope it could be also useful for the others.
 
 ## The very first
 
-You will need to clone this repository, by typing this command below:
+You will need to clone this repository, by typing:
 ```
 $ git clone https://github.com/didats/Slim4-Template your-directory-name
 ```

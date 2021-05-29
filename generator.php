@@ -76,7 +76,7 @@ class Generators {
 
         $str = '<?php
 
-namespace App\Application\Models;
+namespace App\Applications\Models;
 
 class '.$name.' extends Model {
     '.$declaration.'

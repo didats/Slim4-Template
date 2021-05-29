@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Middleware;
+namespace App\Applications\Middleware;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -11,6 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class Token implements Middleware {
     public function process(Request $request, RequestHandler $handler): Response {
         $pass = false;
+        print($_SERVER['App-Token']);
         if(isset($_SERVER['App-Token'])) {
             $appToken = $_SERVER['App-Token'];
             if($appToken == "lskjadfljasdf34lkasdflj034ljafds") {

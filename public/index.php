@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Services\Database;
+use App\Applications\Error\HttpErrorHandler;
+use App\Applications\Services\Database;
 use App\Applications\Core\Setting;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
@@ -41,8 +42,8 @@ $app->addRoutingMiddleware();
 $responseFactory = $app->getResponseFactory();
 $errorHandler = new HttpErrorHandler($callable, $responseFactory);
 
-//$error = $app->addErrorMiddleware(false, false, false);
-//$error->setDefaultErrorHandler($errorHandler);
+$error = $app->addErrorMiddleware(false, false, false);
+$error->setDefaultErrorHandler($errorHandler);
 
 $serverRequestCreator = ServerRequestCreatorFactory::create();
 $request = $serverRequestCreator->createServerRequestFromGlobals();

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Error;
+namespace App\Applications\Error;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpException;
