@@ -1,0 +1,5 @@
+db.host = localhost
+db.user = userdb
+db.password = userpass
+db.name = userpass
+site.url = http://site.local
