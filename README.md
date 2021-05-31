@@ -1,6 +1,8 @@
 # Slim 4 Template Project
 
-<span style="background-color: #FFFF00">Versi bahasa Indonesia, bisa dilihat di berkas PETUNJUK.md</span>
+```
+Versi bahasa Indonesia, bisa dilihat di berkas PETUNJUK.md
+```
 
 The default skeleton from official page of Slim4 is quite difficult for me to understand, and not fun. This version is based on my understanding, and in my opinion quite easy. 
 
