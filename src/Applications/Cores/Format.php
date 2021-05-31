@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Applications\Core;
+namespace App\Applications\Cores;
 
 use Psr\Http\Message\ResponseInterface;
 
@@ -46,6 +46,7 @@ class Format {
         $format->data = $data;
         $format->message = $message;
         $format->statusCode = $status;
+
         return $format->json();
     }
 

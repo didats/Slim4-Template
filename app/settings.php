@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return function(): array {
-    $file = __DIR__."/../.setting";
+    $file = __DIR__."/../.settings";
     $fopen = fopen($file, "r");
     $arr = [];
     while(($buffer = fgets($fopen, 4096)) !== false) {
@@ -20,6 +20,6 @@ return function(): array {
             $arr[$key] = $value;
         }
     }
-
+    
     return $arr;
 };

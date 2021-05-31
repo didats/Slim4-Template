@@ -1,30 +1,34 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Applications\Core;
+namespace App\Applications\Cores;
 
 use App\Applications\Error\PostValidation;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Applications\Services\Database;
-use App\Applications\Core\Format;
-use App\Applications\Core\Setting;
+use App\Applications\Cores\Format;
+use App\Applications\Cores\Setting;
+use App\Applications\Error\Validation;
+use Medoo\Medoo;
 
 class Controller {
-    public Database $db;
+    public Database $database;
+    public Medoo $db;
     public Setting $setting;
     private $container;
     public Format $formatter;
-    private PostValidation $validation;
+    private Validation $validation;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->db = $this->container->get("db");
+        $this->database = $this->container->get("db");
         $this->settings = $container->get("settings");
-        $this->validation = new PostValidation();
+        $this->validation = new Validation();
         $this->formatter = new Format();
+        $this->db = $this->database->db;
     }
 
     public function formatJSON(array $result, array $appended = [], bool $encoded = false) {

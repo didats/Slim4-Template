@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
+use App\YourApp\MyApp;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use Slim\Handlers\Strategies\RequestResponseArgs;
-
 
 
 return function (App $app) {

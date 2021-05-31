@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use App\Applications\Error\HttpErrorHandler;
 use App\Applications\Services\Database;
-use App\Applications\Core\Setting;
+use App\Applications\Cores\Setting;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
@@ -22,7 +22,7 @@ $containerBuilder = new ContainerBuilder();
 $container = $containerBuilder->build();
 
 $container->set('settings', function() {
-    $settings = require __DIR__.'/../app/settings.php';
+    $settings = require __DIR__.'/../app/settings.php';   
     return new Setting($settings());
 });
 
@@ -34,16 +34,13 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 $callable = $app->getCallableResolver();
 
+$middleware = require __DIR__."/../app/middleware.php";
+$middleware($app);
+
 $routes = require __DIR__."/../app/routes.php";
 $routes($app);
 
 $app->addRoutingMiddleware();
-
-$responseFactory = $app->getResponseFactory();
-$errorHandler = new HttpErrorHandler($callable, $responseFactory);
-
-$error = $app->addErrorMiddleware(false, false, false);
-$error->setDefaultErrorHandler($errorHandler);
 
 $serverRequestCreator = ServerRequestCreatorFactory::create();
 $request = $serverRequestCreator->createServerRequestFromGlobals();

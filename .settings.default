@@ -3,3 +3,4 @@ db.user = userdb
 db.password = userpass
 db.name = userpass
 site.url = http://site.local
+site.token = lskjadfljasdf34lkasdflj034ljafds

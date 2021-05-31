@@ -5,15 +5,14 @@ namespace App\Applications\Error;
 
 use App\Applications\Core\Format;
 
-class PostValidation {
-    private $format;
-
-    public function __construct() {
-        $this->format = new Format();
+class Validation {
+    public function json(array $required): ValidationStatus {
+        $data = json_decode(file_get_contents('php://input'), true);
+        return $this->post($required, $data);
     }
 
-    public function validate(array $required, array $post): Validation {
-        $validation = new Validation();
+    public function post(array $required, array $post): ValidationStatus {
+        $validation = new ValidationStatus();
         foreach($required as $key) {
             if(!isset($post[$key])) {
                 $validation->code = 0;
@@ -32,7 +31,7 @@ class PostValidation {
     }
 }
 
-class Validation {
+class ValidationStatus {
     public int $code = 1;
     public string $message = "";
 }

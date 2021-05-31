@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\YourApp;
 
-use App\Applications\Core\Controller;
+use App\Applications\Cores\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -19,15 +19,22 @@ class MyApp extends Controller {
         $data = [
             "item" => 1
         ];
-        $result = $this->toJSON($data);
-        return $this->formatter->okay($response, $result);
+        
+        return $this->formatter->okay($response, $data);
     }
 
     public function getID(ServerRequestInterface $request, ResponseInterface $response, string $id) {
         $data = [
             "id" => $id
         ];
-        $result = $this->toJSON($data);
-        return $this->formatter->okay($response, $result);
+        
+        return $this->formatter->okay($response, $data);
+    }
+
+    public function list(ServerRequestInterface $request, ResponseInterface $response) {
+        /*
+        To use to connect to the database, the Medoo object is at:
+        $this->db;
+        */
     }
 }

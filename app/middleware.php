@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 use Slim\App;
-use App\Applications\Middleware\Token;
+use App\Applications\Middlewares\Token;
 
 return function (App $app) {
-    $app->add(Token::class);
+    //$app->add(new Token($app));
 };
