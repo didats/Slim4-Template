@@ -20,7 +20,7 @@ class Generators {
     }
 
     private function settings(): array {
-        $file = __DIR__."/setting.config";
+        $file = __DIR__."/.setting";
         $fopen = fopen($file, "r");
         $arr = [];
         while(($buffer = fgets($fopen, 4096)) !== false) {
@@ -54,8 +54,10 @@ class Generators {
     }
 
     public function createModel(string $tableName) {
+        $setting = $this->settings();
         $name = $this->filterNames($tableName);
-        $query = "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'quranesia.local' AND table_name = '$tableName'";
+        $dbname = $setting['db.name'];
+        $query = "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = '$dbname' AND table_name = '$tableName'";
         $result = $this->db->query($query)->fetchAll();
 
         $declaration = "";
@@ -78,6 +80,8 @@ class Generators {
 
 namespace App\Applications\Models;
 
+use App\Application\Cores\Model;
+
 class '.$name.' extends Model {
     '.$declaration.'
 
@@ -95,7 +99,7 @@ class '.$name.' extends Model {
         ];
     }    
 }';
-        $file = fopen(__DIR__."/src/Application/Models/".$name.".php", "w+");
+        $file = fopen(__DIR__."/src/Applications/Models/".$name.".php", "w+");
         if($file) {
             $put = fputs($file, $str);
             fclose($file);
