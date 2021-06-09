@@ -3,17 +3,21 @@ declare(strict_types=1);
 
 namespace App\Applications\Error;
 
-use App\Applications\Core\Format;
-
 class Validation {
-    public function json(array $required): ValidationStatus {
-        $data = json_decode(file_get_contents('php://input'), true);
-        return $this->post($required, $data);
+    private array $required;
+
+    public function __construct(array $required) {
+        $this->required = $required;
     }
 
-    public function post(array $required, array $post): ValidationStatus {
+    public function json(): ValidationStatus {
+        $data = json_decode(file_get_contents('php://input'), true);
+        return $this->post($data);
+    }
+
+    public function post(array $post): ValidationStatus {
         $validation = new ValidationStatus();
-        foreach($required as $key) {
+        foreach($this->required as $key) {
             if(!isset($post[$key])) {
                 $validation->code = 0;
                 $validation->message = "Field $key is required";

@@ -14,6 +14,25 @@ use Psr\Http\Message\ServerRequestInterface;
  * @author Didats Triadi <didats@gmail.com>
  */
 
+/*
+
+    Validation
+    // 1. Create an array of required post variables
+    $required = ["field_required", "another_field"];
+
+    // Validation on post data
+    $posts = $request->getParsedBody();
+    $validation = new Validation($required);
+    $status = $validation->post($posts);
+
+    // If you somehow wanted to validate the JSON Raw:
+    $status = $validation->json();
+
+    
+
+
+*/
+
 class MyApp extends Controller {
     public function index(ServerRequestInterface $request, ResponseInterface $response) {
         $data = [
