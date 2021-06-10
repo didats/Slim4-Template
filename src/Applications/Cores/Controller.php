@@ -17,7 +17,7 @@ class Controller {
     public Database $database;
     public Medoo $db;
     public Setting $setting;
-    private $container;
+    private ContainerInterface $container;
     public Format $formatter;
     private Validation $validation;
 
@@ -26,7 +26,6 @@ class Controller {
         $this->container = $container;
         $this->database = $this->container->get("db");
         $this->settings = $container->get("settings");
-        $this->validation = new Validation();
         $this->formatter = new Format();
         $this->db = $this->database->db;
     }

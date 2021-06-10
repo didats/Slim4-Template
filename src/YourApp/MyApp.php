@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\YourApp;
 
 use App\Applications\Cores\Controller;
+use App\Applications\Error\Validation;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -28,18 +29,29 @@ use Psr\Http\Message\ServerRequestInterface;
     // If you somehow wanted to validate the JSON Raw:
     $status = $validation->json();
 
-    
-
-
 */
 
 class MyApp extends Controller {
     public function index(ServerRequestInterface $request, ResponseInterface $response) {
-        $data = [
-            "item" => 1
+        $required = [
+            'item', 'number'
         ];
+
+        // getting the request POST
+        // if the post is not there, then 
+        $parsedBody = $request->getParsedBody();
+        if(!is_array($parsedBody)) {
+            $parsedBody = [];
+        }
+
+        $validation = new Validation($required);
+        $status = $validation->post($parsedBody);
         
-        return $this->formatter->okay($response, $data);
+        if(!$status->code) {
+            return $this->formatter->failed($response, $status->message);
+        }
+
+        return $this->formatter->okay($response, []);
     }
 
     public function getID(ServerRequestInterface $request, ResponseInterface $response, string $id) {
